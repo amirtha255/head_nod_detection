@@ -6,15 +6,6 @@ import pandas as pd
 
 import xml.etree.ElementTree as ET
 
-"""
-
-Run this script from base directory of cardiff dataset so the script could recursively find the files.
-Outputs dataset_cardiff.csv
-
-"""
-
-
-
 
 total_nods=0
 
@@ -156,7 +147,7 @@ for root, dirs, files in os.walk(top, topdown=False):
 							line_text.append(1)
 							print('nod detected',frame_time,nod_start_time_list[i], nod_end_time_list[i])
 
-						elif frame_time<=nod_start_time_list[i] and frame_time<=nod_end_time_list[i]:
+						elif frame_time>=nod_start_time_list[i] and frame_time>=nod_end_time_list[i]:
 
 
 							if i<n-1:
@@ -165,9 +156,10 @@ for root, dirs, files in os.walk(top, topdown=False):
 
 
 						else:
+
 							line_text.append(0)  # for nod
 						
-
+							
 
 						csvwriter.writerow(line_text)
 
@@ -176,8 +168,15 @@ for root, dirs, files in os.walk(top, topdown=False):
 				except Exception as err:
 					print(err)
 			
+"""
+pd.options.display.max_rows = 2
 
+df = pd.read_csv("dataset_cardiff.csv")
 
+print(df)
+
+print(df.columns) 
+"""
 
 
 print('Total nods is ',total_nods)
